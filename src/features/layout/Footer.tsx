@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <>
-      <Navbar className="shadow p-3 bg-white" expand="lg" fixed="bottom">
+      <Navbar className="shadow p-3 bg-white" expand="lg">
         <Container className="justify-content-center">
           <Navbar.Text>
             <span>© {currentYear} Task Manager. All rights reserved.</span>
