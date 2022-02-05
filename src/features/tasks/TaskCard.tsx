@@ -40,7 +40,7 @@ const TaskCard = () => {
     <>
       <Card
         body
-        className="d-flex flex-fill text-start m-3 shadow p-1 bg-white border-light"
+        className="d-flex flex-fill text-start m-4 shadow p-1 bg-white border-light"
       >
         <Row xs="auto">
           <Col className="ms-2">
