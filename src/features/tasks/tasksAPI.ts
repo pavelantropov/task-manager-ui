@@ -1,8 +1,4 @@
-interface Task {
-  title: string;
-  description: string;
-  deadline: Date;
-}
+import Task from "./task";
 
 export function getTask(): Promise<Task> {
   const detail: Task = {
