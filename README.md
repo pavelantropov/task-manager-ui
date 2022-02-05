@@ -1,2 +1,2 @@
 # task-manager
-Task management tool. ASP.NET Core Web API + React with Typescript
+Task management tool UI. React + Typescript
