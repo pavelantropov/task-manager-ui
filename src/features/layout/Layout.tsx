@@ -1,16 +1,17 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import logo from "../../assets/reactLogo.svg";
 import Header from "./Header";
 import Footer from "./Footer";
+import Project from "../tasks/Project";
 import TaskCard from "../tasks/TaskCard";
-import { Container } from "react-bootstrap";
 
 const Layout = () => {
   return (
     <>
       <Header />
       <Container>
-        <TaskCard />
+        <Project />
       </Container>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
