@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TaskCard from "./TaskCard";
 import Task from "./task";
+import { Container, FormCheck } from "react-bootstrap";
 
 export interface ProjectProps {
   projectName?: string;
@@ -33,9 +34,18 @@ const Project = ({
 }: ProjectProps) => {
   return (
     <>
-      <h1 key="projectName" className="fs-2 ms-5 mt-3 text-muted">
-        {projectName}
-      </h1>
+      <Container className="d-flex mt-3 align-items-end">
+        <div className="ms-4">
+          <h1 key="projectName" className="fs-2 text-muted">
+            {projectName}
+          </h1>
+        </div>
+        <FormCheck
+          className="ms-auto me-4 text-muted"
+          type="switch"
+          label="Kanban view"
+        />
+      </Container>
       {items?.map(() => (
         <TaskCard />
       ))}
