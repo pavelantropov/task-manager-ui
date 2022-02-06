@@ -5,6 +5,7 @@ export function getTask(): Promise<Task> {
     title: "Test task",
     description: "A task to test, if it works",
     deadline: new Date(),
+    labels: ["label1", "label2"],
   };
 
   return new Promise<Task>((resolve) =>

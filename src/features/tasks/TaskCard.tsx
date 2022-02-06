@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Row, Col, Form } from "react-bootstrap";
+import { Card, Row, Col, FormCheck } from "react-bootstrap";
 
 import { getTask } from "./tasksAPI";
 
@@ -7,6 +7,7 @@ interface TaskCardState {
   title: string;
   description: string;
   deadline: Date;
+  labels: string[];
 }
 
 const TaskCard = () => {
@@ -14,6 +15,7 @@ const TaskCard = () => {
     title: "Loading...",
     description: "",
     deadline: new Date(),
+    labels: [],
   });
 
   const loadTask = async () => {
@@ -23,6 +25,7 @@ const TaskCard = () => {
         title: response.title,
         description: response.description,
         deadline: response.deadline,
+        labels: response.labels,
       });
     }
   };
@@ -44,7 +47,7 @@ const TaskCard = () => {
       >
         <Row xs="auto">
           <Col className="ms-2">
-            <Form.Check
+            <FormCheck
               className="d-flex h-100 align-items-center"
               type="checkbox"
               id="task-list-checkbox"
