@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Row, Col, Form } from "react-bootstrap";
+import { Card, Row, Col, FormCheck } from "react-bootstrap";
 
 import { getTask } from "./tasksAPI";
 
@@ -44,7 +44,7 @@ const TaskCard = () => {
       >
         <Row xs="auto">
           <Col className="ms-2">
-            <Form.Check
+            <FormCheck
               className="d-flex h-100 align-items-center"
               type="checkbox"
               id="task-list-checkbox"
