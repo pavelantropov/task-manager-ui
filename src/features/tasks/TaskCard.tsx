@@ -7,6 +7,7 @@ interface TaskCardState {
   title: string;
   description: string;
   deadline: Date;
+  labels: string[];
 }
 
 const TaskCard = () => {
@@ -14,6 +15,7 @@ const TaskCard = () => {
     title: "Loading...",
     description: "",
     deadline: new Date(),
+    labels: [],
   });
 
   const loadTask = async () => {
@@ -23,6 +25,7 @@ const TaskCard = () => {
         title: response.title,
         description: response.description,
         deadline: response.deadline,
+        labels: response.labels,
       });
     }
   };
