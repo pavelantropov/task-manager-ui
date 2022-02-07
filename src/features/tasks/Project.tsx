@@ -10,28 +10,6 @@ export interface ProjectState {
   tasks?: Task[];
 }
 
-const defaultItems: Task[] = [
-  {
-    title: "Complete AZ-900 MS learning path",
-    description:
-      "Complete the remaining modules. Start preparing for the exam for real",
-    deadline: new Date("20220207"),
-    labels: ["work", "learning"],
-  },
-  {
-    title: "Get rid of the intern status",
-    description:
-      "Become a real Junior Software Engineer finally. Get a 3x raise",
-    deadline: new Date("20220216"),
-    labels: ["work", "money"],
-  },
-  {
-    title: "Credit card payment",
-    description: "Find ₽110,000 and deposit to the Sberbank credit card",
-    deadline: new Date("20220228"),
-    labels: ["money", "debt"],
-  },
-];
 const Project = () => {
   const [project, setProject] = useState<ProjectState>({
     projectId: 1,
