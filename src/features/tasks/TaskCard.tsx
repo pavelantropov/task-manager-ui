@@ -5,8 +5,8 @@ import Task from "./types";
 const TaskCard = (props: Task) => {
   const timeUntilDeadline =
     props.deadline != undefined &&
-    Math.abs(props.deadline.getTime() - new Date().getTime());
-  const daysLeft = timeUntilDeadline
+    props.deadline.getTime() - new Date().getTime();
+  const daysLeft = timeUntilDeadline && timeUntilDeadline > 0
     ? Math.ceil(timeUntilDeadline / (1000 * 3600 * 24))
     : 0;
 
