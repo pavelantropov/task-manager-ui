@@ -1,43 +1,14 @@
-import { useEffect, useState } from "react";
 import { Card, Row, Col, FormCheck } from "react-bootstrap";
 
-import { getTask } from "./tasksAPI";
+import Task from "./types";
 
-interface TaskCardState {
-  title: string;
-  description: string;
-  deadline: Date;
-  labels: string[];
-}
-
-const TaskCard = () => {
-  const [task, setTaskCard] = useState<TaskCardState>({
-    title: "Loading...",
-    description: "",
-    deadline: new Date(),
-    labels: [],
-  });
-
-  const loadTask = async () => {
-    const response = await getTask();
-    if (response.title) {
-      setTaskCard({
-        title: response.title,
-        description: response.description,
-        deadline: response.deadline,
-        labels: response.labels,
-      });
-    }
-  };
-
-  useEffect(() => {
-    loadTask();
-  }, []);
-
-  const timeUntilDeadline = Math.abs(
-    task.deadline.getTime() - new Date().getTime()
-  );
-  const daysLeft = Math.ceil(timeUntilDeadline / (1000 * 3600 * 24));
+const TaskCard = (props: Task) => {
+  const timeUntilDeadline =
+    props.deadline != undefined &&
+    Math.abs(props.deadline.getTime() - new Date().getTime());
+  const daysLeft = timeUntilDeadline
+    ? Math.ceil(timeUntilDeadline / (1000 * 3600 * 24))
+    : 0;
 
   return (
     <>
@@ -54,13 +25,13 @@ const TaskCard = () => {
             />
           </Col>
           <Col>
-            <Card.Title className="mb-1">{task.title}</Card.Title>
+            <Card.Title className="mb-1">{props.title}</Card.Title>
 
             <Card.Text
               className="fs-6 mb-1 text-muted"
               style={{ minHeight: "2rem" }}
             >
-              {task.description}
+              {props.description}
             </Card.Text>
             <Card.Text className="text-muted" style={{ minHeight: "1.5rem" }}>
               <small>
