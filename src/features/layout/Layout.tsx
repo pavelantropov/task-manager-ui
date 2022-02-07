@@ -4,7 +4,6 @@ import logo from "../../assets/reactLogo.svg";
 import Header from "./Header";
 import Footer from "./Footer";
 import Project from "../tasks/Project";
-import TaskCard from "../tasks/TaskCard";
 
 const Layout = () => {
   return (
