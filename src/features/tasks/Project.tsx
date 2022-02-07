@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TaskCard from "./TaskCard";
-import Task from "./task";
+import Task from "./types";
 import { Container, FormCheck } from "react-bootstrap";
+import { getTasks } from "./tasksAPI";
 
-export interface ProjectProps {
+export interface ProjectState {
+  projectId: number;
   projectName?: string;
-  items?: Task[];
+  tasks?: Task[];
 }
 
 const defaultItems: Task[] = [
@@ -30,17 +32,34 @@ const defaultItems: Task[] = [
     labels: ["money", "debt"],
   },
 ];
+const Project = () => {
+  const [project, setProject] = useState<ProjectState>({
+    projectId: 1,
+    projectName: "New project",
+    tasks: [],
+  });
 
-const Project = ({
-  projectName = "New project",
-  items = defaultItems,
-}: ProjectProps) => {
+  const loadTasks = async () => {
+    const fetchTasksResponse = await getTasks();
+    if (fetchTasksResponse) {
+      setProject({
+        projectId: project.projectId,
+        projectName: project.projectName,
+        tasks: fetchTasksResponse,
+      });
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
   return (
     <>
       <Container className="d-flex mt-3 align-items-end">
         <div className="ms-4">
           <h1 key="projectName" className="fs-2 text-muted">
-            {projectName}
+            {project.projectName}
           </h1>
         </div>
         <FormCheck
@@ -49,8 +68,14 @@ const Project = ({
           label="Kanban view"
         />
       </Container>
-      {items?.map(() => (
-        <TaskCard />
+      {project.tasks?.map((task) => (
+        <TaskCard
+          taskId={task.taskId}
+          title={task.title}
+          description={task.description}
+          deadline={task.deadline}
+          labels={task.labels}
+        />
       ))}
     </>
   );
