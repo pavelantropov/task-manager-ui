@@ -18,7 +18,7 @@ const Project = () => {
   });
 
   const loadTasks = async () => {
-    const fetchTasksResponse = await getTasks();
+    const fetchTasksResponse = Array.from(await getTasks());
     if (fetchTasksResponse) {
       setProject({
         projectId: project.projectId,
