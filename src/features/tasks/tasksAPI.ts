@@ -2,7 +2,7 @@ import { DefaultTasks } from "../../data/data";
 import Task, { CreateTaskRequest, CreateTaskResponse } from "./types";
 
 export async function getTasks(): Promise<Task[]> {
-  if (process.env.NODE_ENV != "test") {
+  if (process.env.NODE_ENV === "test") {
     return new Promise<Task[]>((resolve) =>
       setTimeout(() => resolve(DefaultTasks), 1500)
     );
@@ -18,7 +18,7 @@ export async function getTasks(): Promise<Task[]> {
 export async function createTask(
   params: CreateTaskRequest
 ): Promise<CreateTaskResponse> {
-  if (process.env.NODE_ENV != "test") {
+  if (process.env.NODE_ENV === "test") {
     return new Promise<CreateTaskResponse>((resolve) =>
       setTimeout(() => resolve({ ok: true } as Response), 1500)
     );
