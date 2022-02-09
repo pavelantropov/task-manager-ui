@@ -11,3 +11,13 @@ export interface FetchTasksResponse extends Response {
   count: number;
 }
 
+export interface CreateTaskRequest {
+  title: string;
+  description: string;
+  deadline: Date;
+  labels: string[];
+}
+
+export interface CreateTaskResponse extends Response {
+  
+}
