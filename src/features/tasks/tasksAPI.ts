@@ -13,7 +13,9 @@ export function getTasks(): Promise<Task[]> {
       .then((response) => response.json)
       .then((data) => data as unknown as Promise<Task[]>);
 
-export async function createTask(params: CreateTaskRequest) : Promise<CreateTaskResponse> {
+export async function createTask(
+  params: CreateTaskRequest
+): Promise<CreateTaskResponse> {
   if (process.env.NODE_ENV != "test") {
     return new Promise<CreateTaskResponse>((resolve) =>
       setTimeout(() => resolve({ ok: true } as Response), 1500)
