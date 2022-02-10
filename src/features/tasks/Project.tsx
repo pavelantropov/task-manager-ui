@@ -46,7 +46,7 @@ const Project = () => {
           label="Kanban view"
         />
       </Container>
-      {project.tasks?.map((task) => (
+      {project.tasks !== undefined && project.tasks?.length > 0 ? project.tasks?.map((task) => (
         <TaskCard
           taskId={task.taskId}
           title={task.title}
@@ -54,7 +54,7 @@ const Project = () => {
           deadline={task.deadline}
           labels={task.labels}
         />
-      ))}
+      )) : ""}
       <Button
         className="ms-5 text-muted"
         size="lg"
