@@ -10,8 +10,7 @@ export async function getTasks(): Promise<Task[]> {
     return await fetch(`${process.env.REACT_APP_API_URI}/api/tasks`, {
       method: "GET",
     })
-      .then((response) => response.json)
-      .then((data) => data as unknown as Promise<Task[]>);
+      .then((response) => response.json) as unknown as Task[];
   }
 }
 
