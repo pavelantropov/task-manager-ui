@@ -6,9 +6,8 @@ export default interface Task {
   labels?: string[];
 }
 
-export interface FetchTasksResponse extends Response {
+export interface GetTasksResponse extends Response {
   data: Task[];
-  count: number;
 }
 
 export interface CreateTaskRequest {
