@@ -7,10 +7,11 @@ export async function getTasks(): Promise<Task[]> {
       setTimeout(() => resolve(DefaultTasksArray), 1500)
     );
   } else {
-    return await fetch(`${process.env.REACT_APP_API_URI}/api/tasks`, {
+    return (await fetch(`${process.env.REACT_APP_API_URI}/api/tasks`, {
       method: "GET",
+      headers: { Accept: "application/json" },
     })
-      .then((response) => response.json) as unknown as Task[];
+      .then((response) => response.json())) as unknown as Task[];
   }
 }
 
