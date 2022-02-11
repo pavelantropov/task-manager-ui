@@ -45,8 +45,9 @@ const Project = () => {
           label="Kanban view"
         />
       </Container>
-      {project.tasks !== undefined && project.tasks?.length > 0 ? project.tasks?.map((task) => (
+      {project.tasks !== undefined && project.tasks?.length > 0 ? project.tasks?.map((task, index) => (
         <TaskCard
+          key={"task_" + index}
           taskId={task.taskId}
           title={task.title}
           description={task.description}
