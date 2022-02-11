@@ -16,16 +16,15 @@ const Project = () => {
     projectName: "New project",
     tasks: [],
   });
-
+  
   const loadTasks = async () => {
-    const fetchTasksResponse = await getTasks();
-    if (fetchTasksResponse) {
+    await getTasks().then((response) => {
       setProject({
         projectId: project.projectId,
         projectName: project.projectName,
-        tasks: fetchTasksResponse,
+        tasks: response,
       });
-    }
+    });
   };
 
   useEffect(() => {
