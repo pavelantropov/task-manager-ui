@@ -18,11 +18,12 @@ const Project = () => {
   });
   
   const loadTasks = () => {
-    getTasks().then((response) => {
+    getTasks().then((res) => {
+      res.tasks.forEach((task) => task.deadline !== undefined ? task.deadline = new Date(task.deadline) : task);
       setProject({
         projectId: project.projectId,
         projectName: project.projectName,
-        tasks: response.data,
+        tasks: res.tasks,
       });
     });
   };
@@ -33,7 +34,7 @@ const Project = () => {
 
   return (
     <>
-      <Container className="d-flex mt-3 align-items-end">
+      <Container className="d-flex mt-4 align-items-end">
         <div className="ms-4">
           <h1 key="projectName" className="fs-2 text-muted">
             {project.projectName}
@@ -56,7 +57,7 @@ const Project = () => {
         />
       )) : ""}
       <Button
-        className="ms-5 text-muted"
+        className="mb-4 ms-5 text-muted"
         size="lg"
         variant="outline-light"
         onClick={() => {

@@ -7,7 +7,7 @@ export default interface Task {
 }
 
 export interface GetTasksResponse extends Response {
-  data: Task[];
+  tasks: Task[];
 }
 
 export interface CreateTaskRequest {
