@@ -1,8 +1,8 @@
 import Task from "../features/tasks/types";
 
-export const DefaultTasks: Task[] = [
+export const DefaultTasksArray: Task[] = [
   {
-    taskId: 1,
+    taskId: "1",
     title: "Complete AZ-900 MS learning path",
     description:
       "Complete the remaining modules. Start preparing for the exam for real",
@@ -10,7 +10,7 @@ export const DefaultTasks: Task[] = [
     labels: ["work", "learning"],
   },
   {
-    taskId: 2,
+    taskId: "2",
     title: "Get rid of the intern status",
     description:
       "Become a real Junior Software Engineer finally. Get a 3x raise",
@@ -18,7 +18,7 @@ export const DefaultTasks: Task[] = [
     labels: ["work", "money"],
   },
   {
-    taskId: 3,
+    taskId: "3",
     title: "Credit card payment",
     description: "Find ₽110,000 and deposit to the Sberbank credit card",
     deadline: new Date("2022-2-28"),

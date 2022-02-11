@@ -1,21 +1,20 @@
 export default interface Task {
-  taskId: number;
+  taskId: string;
   title: string;
-  description: string;
-  deadline: Date;
-  labels: string[];
+  description?: string;
+  deadline?: Date;
+  labels?: string[];
 }
 
-export interface FetchTasksResponse extends Response {
-  data: Task[];
-  count: number;
+export interface GetTasksResponse extends Response {
+  tasks: Task[];
 }
 
 export interface CreateTaskRequest {
   title: string;
-  description: string;
-  deadline: Date;
-  labels: string[];
+  description?: string;
+  deadline?: Date;
+  labels?: string[];
 }
 
 export interface CreateTaskResponse extends Response {

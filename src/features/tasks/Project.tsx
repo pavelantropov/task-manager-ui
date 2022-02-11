@@ -16,16 +16,16 @@ const Project = () => {
     projectName: "New project",
     tasks: [],
   });
-
-  const loadTasks = async () => {
-    const fetchTasksResponse = await getTasks();
-    if (fetchTasksResponse) {
+  
+  const loadTasks = () => {
+    getTasks().then((res) => {
+      res.tasks.forEach((task) => task.deadline !== undefined ? task.deadline = new Date(task.deadline) : task);
       setProject({
         projectId: project.projectId,
         projectName: project.projectName,
-        tasks: fetchTasksResponse,
+        tasks: res.tasks,
       });
-    }
+    });
   };
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const Project = () => {
 
   return (
     <>
-      <Container className="d-flex mt-3 align-items-end">
+      <Container className="d-flex mt-4 align-items-end">
         <div className="ms-4">
           <h1 key="projectName" className="fs-2 text-muted">
             {project.projectName}
@@ -46,17 +46,18 @@ const Project = () => {
           label="Kanban view"
         />
       </Container>
-      {project.tasks?.map((task) => (
+      {project.tasks !== undefined && project.tasks?.length > 0 ? project.tasks?.map((task, index) => (
         <TaskCard
+          key={"task_" + index}
           taskId={task.taskId}
           title={task.title}
           description={task.description}
           deadline={task.deadline}
           labels={task.labels}
         />
-      ))}
+      )) : ""}
       <Button
-        className="ms-5 text-muted"
+        className="mb-4 ms-5 text-muted"
         size="lg"
         variant="outline-light"
         onClick={() => {
