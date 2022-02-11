@@ -1,6 +1,6 @@
 import Task from "../features/tasks/types";
 
-export const DefaultTasks: Task[] = [
+export const DefaultTasksArray: Task[] = [
   {
     taskId: "1",
     title: "Complete AZ-900 MS learning path",

@@ -1,10 +1,10 @@
-import { DefaultTasks } from "../../data/data";
+import { DefaultTasksArray } from "../../data/data";
 import Task, { CreateTaskRequest, CreateTaskResponse } from "./types";
 
 export async function getTasks(): Promise<Task[]> {
   if (process.env.NODE_ENV === "test") {
     return new Promise<Task[]>((resolve) =>
-      setTimeout(() => resolve(DefaultTasks), 1500)
+      setTimeout(() => resolve(DefaultTasksArray), 1500)
     );
   } else {
     return await fetch(`${process.env.REACT_APP_API_URI}/api/tasks`, {
