@@ -17,12 +17,12 @@ const Project = () => {
     tasks: [],
   });
   
-  const loadTasks = async () => {
-    await getTasks().then((response) => {
+  const loadTasks = () => {
+    getTasks().then((response) => {
       setProject({
         projectId: project.projectId,
         projectName: project.projectName,
-        tasks: response,
+        tasks: response.data,
       });
     });
   };
