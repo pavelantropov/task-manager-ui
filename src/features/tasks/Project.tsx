@@ -34,6 +34,11 @@ const Project = () => {
   useEffect(() => {
     loadTasks();
   }, []);
+  useEffect(() => {
+    const timeout = setTimeout(() => loadTasks(), 3000);
+
+    return () => clearTimeout(timeout);
+  }, [loadTasks]);
 
   return (
     <>
