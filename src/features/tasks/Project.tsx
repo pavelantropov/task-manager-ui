@@ -3,8 +3,9 @@ import TaskCard from "./TaskCard";
 import Task from "./types";
 import { Container, FormCheck, Button } from "react-bootstrap";
 import { getTasks } from "./tasksAPI";
+import CreateTaskPopup from "./CreateTaskPopup";
 
-export interface ProjectState {
+interface ProjectState {
   projectId: number;
   projectName?: string;
   tasks?: Task[];
@@ -56,16 +57,8 @@ const Project = () => {
           labels={task.labels}
         />
       )) : ""}
-      <Button
-        className="mb-4 ms-5 text-muted"
-        size="lg"
-        variant="outline-light"
-        onClick={() => {
-          alert("not supported");
-        }}
-      >
-        + Add task
-      </Button>
+
+      <CreateTaskPopup />
     </>
   );
 };
