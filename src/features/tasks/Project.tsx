@@ -17,10 +17,12 @@ const Project = () => {
     projectName: "New project",
     tasks: [],
   });
-  
+
   const loadTasks = () => {
     getTasks().then((res) => {
-      res.tasks.forEach((task) => task.deadline && (task.deadline = new Date(task.deadline)));
+      res.tasks.forEach(
+        (task) => task.deadline && (task.deadline = new Date(task.deadline))
+      );
       setProject({
         projectId: project.projectId,
         projectName: project.projectName,
@@ -47,16 +49,18 @@ const Project = () => {
           label="Kanban view"
         />
       </Container>
-      {project.tasks && project.tasks?.length > 0 && project.tasks?.map((task, index) => (
-        <TaskCard
-          key={"task_" + index}
-          taskId={task.taskId}
-          title={task.title}
-          description={task.description}
-          deadline={task.deadline}
-          labels={task.labels}
-        />
-      ))}
+      {project.tasks &&
+        project.tasks?.length > 0 &&
+        project.tasks?.map((task, index) => (
+          <TaskCard
+            key={"task_" + index}
+            taskId={task.taskId}
+            title={task.title}
+            description={task.description}
+            deadline={task.deadline}
+            labels={task.labels}
+          />
+        ))}
 
       <CreateTaskPopup />
     </>
