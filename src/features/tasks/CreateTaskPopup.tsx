@@ -1,28 +1,51 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { createTask } from "./tasksAPI";
 
-interface FormState {
-  title: string;
-  description?: string;
-  deadline?: Date;
-  labels?: string[];
-}
-
 const CreateTaskPopup = () => {
-  const [form, setForm] = useState<FormState>();
   const [showPopup, setShowPopup] = useState(false);
+
+  const [titleInput, setTitleInput] = useState<string>("");
+  const [descriptionInput, setDescriptionInput] = useState<string | undefined>(
+    ""
+  );
+  const [deadlineInput, setDeadlineInput] = useState<Date | null | undefined>(
+    null
+  );
+
+  const clearFormState = () => {
+    setTitleInput("");
+    setDescriptionInput("");
+    setDeadlineInput(null);
+  };
+
   const handleShowPopup = () => setShowPopup(true);
-  const handleClose = () => setShowPopup(false);
-  const handleSubmit = () => {
-    alert("not implemented");
-    // createTask();
+  const handleClose = () => {
+    setShowPopup(false);
+  };
+
+  const onDiscard = () => {
+    clearFormState();
+    handleClose();
+  };
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    const task = {
+      title: titleInput,
+      description: descriptionInput !== "" ? descriptionInput : undefined,
+      deadline: deadlineInput !== null ? deadlineInput : undefined,
+    };
+
+    createTask(task);
+
+    clearFormState();
+    handleClose();
   };
 
   return (
     <>
       <Button
-      // TODO fix margin bottom
         className="mb-4 ms-5 text-muted"
         size="lg"
         variant="outline-light"
@@ -31,35 +54,54 @@ const CreateTaskPopup = () => {
         + Add task
       </Button>
 
-      <Form>
-        <Modal show={showPopup} onHide={handleClose} size="lg" centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Create a new task</Modal.Title>
-          </Modal.Header>
+      <Modal show={showPopup} onHide={handleClose} size="lg" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Create a new task</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={onSubmit}>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="createTaskFormTitle">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter title" />
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter title"
+                onChange={(e) => setTitleInput(e.target.value)}
+                value={titleInput}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="createTaskFormDescription">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Enter description" />
+              <Form.Control
+                type="text"
+                placeholder="Enter description"
+                onChange={(e) => setDescriptionInput(e.target.value)}
+                value={descriptionInput}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="createTaskFormDeadline">
-              <Form.Label>deadline</Form.Label>
-              <Form.Control type="date" />
+              <Form.Label>Deadline</Form.Label>
+              <Form.Control
+                type="date"
+                onChange={(e) => setDeadlineInput(new Date(e.target.value))}
+                value={
+                  deadlineInput && deadlineInput !== null
+                    ? deadlineInput.toISOString().split("T")[0]
+                    : ""
+                }
+              />
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={onDiscard}>
               Discard
             </Button>
-            <Button variant="primary" onClick={handleClose} type="submit">
+            <Button variant="primary" type="submit">
               Create task
             </Button>
           </Modal.Footer>
-        </Modal>
-      </Form>
+        </Form>
+      </Modal>
     </>
   );
 };
