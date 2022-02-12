@@ -20,7 +20,7 @@ const Project = () => {
   
   const loadTasks = () => {
     getTasks().then((res) => {
-      res.tasks.forEach((task) => task.deadline !== undefined ? task.deadline = new Date(task.deadline) : task);
+      res.tasks.forEach((task) => task.deadline && (task.deadline = new Date(task.deadline)));
       setProject({
         projectId: project.projectId,
         projectName: project.projectName,
@@ -47,7 +47,7 @@ const Project = () => {
           label="Kanban view"
         />
       </Container>
-      {project.tasks !== undefined && project.tasks?.length > 0 ? project.tasks?.map((task, index) => (
+      {project.tasks && project.tasks?.length > 0 && project.tasks?.map((task, index) => (
         <TaskCard
           key={"task_" + index}
           taskId={task.taskId}
@@ -56,7 +56,7 @@ const Project = () => {
           deadline={task.deadline}
           labels={task.labels}
         />
-      )) : ""}
+      ))}
 
       <CreateTaskPopup />
     </>
