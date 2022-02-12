@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TaskCard from "./TaskCard";
 import Task from "./types";
-import { Container, FormCheck, Button } from "react-bootstrap";
+import { Container, FormCheck } from "react-bootstrap";
 import { getTasks } from "./tasksAPI";
 import CreateTaskPopup from "./CreateTaskPopup";
 
