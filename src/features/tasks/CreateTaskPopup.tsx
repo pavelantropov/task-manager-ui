@@ -3,28 +3,23 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { createTask } from "./tasksAPI";
 
 const CreateTaskPopup = () => {
-  const [showPopup, setShowPopup] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const [titleInput, setTitleInput] = useState<string>("");
-  const [descriptionInput, setDescriptionInput] = useState<string | undefined>(
-    ""
-  );
-  const [deadlineInput, setDeadlineInput] = useState<Date | null | undefined>(
-    null
-  );
+  const [titleInput, setTitleInput] = useState("");
+  const [descriptionInput, setDescriptionInput] = useState("");
+  const [deadlineInput, setDeadlineInput] = useState<Date | undefined>();
+  const [labelsInput, setLabelsInput] = useState([""]);
 
   const clearFormState = () => {
     setTitleInput("");
     setDescriptionInput("");
-    setDeadlineInput(null);
+    setDeadlineInput(undefined);
   };
 
-  const handleShowPopup = () => setShowPopup(true);
-  const handleClose = () => {
-    setShowPopup(false);
-  };
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
-  const onDiscard = () => {
+  const handleDiscard = () => {
     clearFormState();
     handleClose();
   };
@@ -33,8 +28,9 @@ const CreateTaskPopup = () => {
 
     const task = {
       title: titleInput,
-      description: descriptionInput !== "" ? descriptionInput : undefined,
-      deadline: deadlineInput !== null ? deadlineInput : undefined,
+      description: descriptionInput,
+      deadline: deadlineInput,
+      labels: labelsInput,
     };
 
     createTask(task);
@@ -49,12 +45,12 @@ const CreateTaskPopup = () => {
         className="mb-4 ms-5 text-muted"
         size="lg"
         variant="outline-light"
-        onClick={handleShowPopup}
+        onClick={handleShow}
       >
         + Add task
       </Button>
 
-      <Modal show={showPopup} onHide={handleClose} size="lg" centered>
+      <Modal show={show} onHide={handleClose} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>Create a new task</Modal.Title>
         </Modal.Header>
@@ -93,7 +89,7 @@ const CreateTaskPopup = () => {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={onDiscard}>
+            <Button variant="secondary" onClick={handleDiscard}>
               Discard
             </Button>
             <Button variant="primary" type="submit">
