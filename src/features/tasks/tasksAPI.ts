@@ -3,6 +3,9 @@ import {
   GetTasksResponse,
   CreateTaskRequest,
   CreateTaskResponse,
+  DeleteTaskResponse,
+  UpdateTaskResponse,
+  UpdateTaskRequest,
 } from "./types";
 
 export function getTasks(): Promise<GetTasksResponse> {
@@ -16,8 +19,7 @@ export function getTasks(): Promise<GetTasksResponse> {
     return fetch(`${process.env.REACT_APP_API_URI}/api/tasks`, {
       method: "GET",
       headers: { Accept: "application/json" },
-    })
-      .then((response) => response.json());
+    }).then((response) => response.json());
   }
 }
 
@@ -33,6 +35,37 @@ export async function createTask(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(params),
+    });
+  }
+}
+
+export async function updateTask(
+  params: UpdateTaskRequest
+): Promise<UpdateTaskResponse> {
+  if (process.env.NODE_ENV === "test") {
+    return new Promise<UpdateTaskResponse>((resolve) =>
+      setTimeout(() => resolve({ ok: true } as Response), 1500)
+    );
+  } else {
+    return await fetch(`${process.env.REACT_APP_API_URI}/api/tasks`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
+    });
+  }
+}
+
+export async function deleteTask(
+  taskId: string
+): Promise<DeleteTaskResponse> {
+  if (process.env.NODE_ENV === "test") {
+    return new Promise<DeleteTaskResponse>((resolve) =>
+      setTimeout(() => resolve({ ok: true } as Response), 1500)
+    );
+  } else {
+    return await fetch(`${process.env.REACT_APP_API_URI}/api/tasks/${taskId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
     });
   }
 }

@@ -20,3 +20,19 @@ export interface CreateTaskRequest {
 export interface CreateTaskResponse extends Response {
   
 }
+
+export interface UpdateTaskRequest {
+  taskId: string;
+  title: string;
+  description?: string;
+  deadline?: Date;
+  labels?: string[];
+}
+
+export interface UpdateTaskResponse extends Response {
+  
+}
+
+export interface DeleteTaskResponse extends Response {
+  
+}
